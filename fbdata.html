@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script>
+
+var myFeed = {
+  "data": [
+    {
+      "id": "850006301689295_1737607846262465",
+      "name": "Instagram Photos"
+    },
+    {
+      "id": "850006301689295_1626578994032018",
+      "name": "Instagram Photos"
+    },
+    {
+      "id": "850006301689295_1565489616807623",
+      "name": "Instagram Photos"
+    },
+    {
+      "id": "850006301689295_1562918453731406",
+      "name": "Nidhi Pandey"
+    },
+    {
+      "id": "850006301689295_1550089085014343",
+      "name": "Instagram post by Nidhi Pandey • Feb 24, 2017 at 11:05am UTC"
+    },
+    {
+      "id": "850006301689295_1507581105931808",
+      "name": "Nidhi's cover photo"
+    },
+    {
+      "id": "850006301689295_1505900362766549",
+      "name": "Instagram post by Nidhi Pandey • Jun 25, 2017 at 11:27am UTC"
+    },
+    {
+      "id": "850006301689295_1420608994629020",
+      "name": "Instagram post by Nidhi Pandey • Apr 14, 2017 at 6:46pm UTC"
+    },
+    {
+      "id": "850006301689295_1345882575434996"
+    },
+    {
+      "id": "850006301689295_1343133145709939",
+      "name": "Instagram photo by Nidhi Pandey • Jan 31, 2017 at 7:30pm UTC"
+    },
+    {
+      "id": "850006301689295_1336960082993912",
+      "name": "Instagram photo by Nidhi Pandey • Jan 24, 2017 at 5:28pm UTC"
+    },
+    {
+      "id": "850006301689295_1263349243688330",
+      "name": "Instagram photo by Nidhi Pandey • Nov 25, 2016 at 2:19pm UTC"
+    },
+    {
+      "id": "850006301689295_1246144295408825",
+      "name": "Instagram photo by Nidhi Pandey • Nov 8, 2016 at 8:50am UTC"
+    },
+    {
+      "id": "850006301689295_1236108116412443",
+      "name": "Instagram photo by Nidhi Pandey • Oct 28, 2016 at 2:15pm UTC"
+    },
+    {
+      "id": "850006301689295_1226759697347285",
+      "name": "Instagram photo by Nidhi Pandey • Oct 18, 2016 at 9:03am UTC"
+    },
+    {
+      "id": "850006301689295_1204539306235991",
+      "name": "Instagram photo by Nidhi Pandey • Sep 23, 2016 at 6:26am UTC"
+    },
+    {
+      "id": "850006301689295_1196452840377971",
+      "name": "Instagram photo by Nidhi Pandey • Sep 12, 2016 at 4:08pm UTC"
+    },
+    {
+      "id": "850006301689295_1178214338868488",
+      "name": "UNILAD"
+    },
+    {
+      "id": "850006301689295_1165840580105864",
+      "name": "Instagram photo by Nidhi • Aug 5, 2016 at 4:52pm UTC"
+    },
+    {
+      "id": "850006301689295_1163732023650053",
+      "name": "Instagram photo by Nidhi • Aug 2, 2016 at 2:16pm UTC"
+    },
+    {
+      "id": "850006301689295_1156853771004545",
+      "name": "Instagram photo by Nidhi • Jul 22, 2016 at 4:20pm UTC"
+    },
+    {
+      "id": "850006301689295_1148338858522703",
+      "name": "Instagram photo by Nidhi • Jul 9, 2016 at 10:55am UTC"
+    }
+    
+  ],
+ 
+};
+
+
+$ (document).ready(function() {
+  $('.container').hide();
+  $('.container1').hide();
+
+  var myFacebookToken= 'EAACEdEose0cBAIJdeNTzPngGpsMI1RntaZCdAEwX9wysiODKPZBqZAJiJ6IIfVpvZAlYQFQAEf7Q0jL9oeXewsRgVZAfLZB88NcBiihboF8HlzZAIKBzQsgY5fLLJ72kvZBUWuTq8RjpnZBmPGLgL3vX4Yh7ED65q9qWBtdrV3FkICkg68wutOHcAUJKlFIaPLZBM0ZBDBlWwZAbjAZDZD'; 
+
+  function getFbInfo(){
+    $('.container').show();
+    $('.container1').hide();
+    $.ajax('https://graph.facebook.com/v2.10/me?access_token='+myFacebookToken,{
+
+      success : function(response){
+        console.log(response);
+        console.log(typeof(response));
+        $("#d1").text(response.id);
+        $("#d2").text(response.name);
+        $("#d3").html('<a target="blank" href="https://facebook.com/'+response.id+'">https://facebook.com/'+response.id+'</a>');
+
+      },
+
+      error: function(request, errorType, errorMessage){
+        console.log(request);
+        console.log(errorType);
+        alert("Token Error!");
+      }
+
+
+      
+    });//end of ajax Call
+    
+  } //end of getFbInfo
+
+  
+ function getFbPost(){
+  $('.container').hide();
+  $('.container1').show();
+function showValue(i, val){
+    $('container').hide();
+    $('container1').show();
+    if(val.name != undefined && val.name != null)
+    $('#one').append(val.id+"&#09;&#09"+val.name+"<br/>");
+    //$('#two').append(val.name+"<br/>");
+
+  }jQuery.each(myFeed.data,showValue);
+
+ }
+  $("#1").on('click',getFbInfo);
+ $("#2").on('click',getFbPost);
+});
+
+
+  </script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>Simple Jquery</h1>
+  <button id="1">Click to fetch basic details</button> 
+  <button id="2">Click to fetch recent posts</button>
+</div>
+  
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>ID</h3>
+      <p id="d1"></p>
+
+    </div>
+    <div class="col-sm-4">
+      <h3>NAME</h3>
+      <p id="d2"></p>
+    </div>
+    <div class="col-sm-4">
+      <h3>FB LINK</h3>        
+      <p id="d3"></p>
+    </div>
+  </div>
+</div>
+
+<div class="container1">
+  <div class="row">
+    
+  <p id="one"></p>
+
+</div>
+</div>
+
+</body>
+</html>
