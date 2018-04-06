@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
   <script>
 
 var myFeed = {
@@ -109,18 +108,20 @@ $ (document).ready(function() {
   $('.container').hide();
   $('.container1').hide();
 
-  var myFacebookToken= 'EAACEdEose0cBAIJdeNTzPngGpsMI1RntaZCdAEwX9wysiODKPZBqZAJiJ6IIfVpvZAlYQFQAEf7Q0jL9oeXewsRgVZAfLZB88NcBiihboF8HlzZAIKBzQsgY5fLLJ72kvZBUWuTq8RjpnZBmPGLgL3vX4Yh7ED65q9qWBtdrV3FkICkg68wutOHcAUJKlFIaPLZBM0ZBDBlWwZAbjAZDZD'; 
+  var myFacebookToken= 'EAACEdEose0cBAJ9uRS0HEg7KTV6HRVUay5twt27vwTBZCqcOcVIbUigtp5E4VqbKi3Yt2AJtHkQXLeQvJroisafcVwA7TQ1F5AnjEm1Cj1aI4I87jjeXCMr2vXwiRQdlngp05aAyXSI1t8hgZBH8Kib90AWlTZCvjVENuMm4yPM5XAqGzHi0uvDFkdhsTcZD'; 
 
   function getFbInfo(){
     $('.container').show();
     $('.container1').hide();
-    $.ajax('https://graph.facebook.com/v2.10/me?access_token='+myFacebookToken,{
+    $.ajax('https://graph.facebook.com/v2.10/me?fields=name,email,birthday&&access_token='+myFacebookToken,{
 
       success : function(response){
         console.log(response);
         console.log(typeof(response));
         $("#d1").text(response.id);
-        $("#d2").text(response.name);
+        $("#d4").text(response.name);
+        $("#d2").text(response.email);
+        $("#d5").text(response.birthday);
         $("#d3").html('<a target="blank" href="https://facebook.com/'+response.id+'">https://facebook.com/'+response.id+'</a>');
 
       },
@@ -169,16 +170,18 @@ function showValue(i, val){
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
-      <h3>ID</h3>
+      <h4>ID and name</h4>
       <p id="d1"></p>
+      <p id="d4"></p>
 
     </div>
     <div class="col-sm-4">
-      <h3>NAME</h3>
+      <h4>email and DOB</h4>
       <p id="d2"></p>
+      <p id="d5"></p>
     </div>
     <div class="col-sm-4">
-      <h3>FB LINK</h3>        
+      <h4>Profile link</h4>        
       <p id="d3"></p>
     </div>
   </div>
